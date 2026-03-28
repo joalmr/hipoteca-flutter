@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TituloCalcule extends StatelessWidget {
-  const TituloCalcule({super.key});
+class CalculatorHeader extends StatelessWidget {
+  const CalculatorHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
