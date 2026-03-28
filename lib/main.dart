@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:hipoteca/app/domain/mortgage_provider.dart';
 import 'package:hipoteca/app/presentation/views/home/home.dart';
@@ -7,7 +7,7 @@ import 'package:hipoteca/src/styles/colors/colors.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
+  // MobileAds.instance.initialize();
   runApp(
     ChangeNotifierProvider(
       create: (_) => MortgageProvider(),
