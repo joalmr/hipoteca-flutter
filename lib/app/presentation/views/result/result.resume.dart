@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hipoteca/app/presentation/views/result/widgets/detalle.dart';
-import 'package:hipoteca/main.dart';
+import 'package:provider/provider.dart';
+import 'package:hipoteca/app/domain/mortgage_provider.dart';
+import 'package:hipoteca/app/presentation/views/result/widgets/mortgage_detail_item.dart';
 import 'package:hipoteca/src/styles/colors/colors.dart';
 
 class ResumenView extends StatelessWidget {
@@ -8,68 +9,74 @@ class ResumenView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final calculeLogic = MyInheretedWidget.of(context)!.calculeLogic;
-    return Container(
-      width: double.maxFinite,
+    final mortgageProvider = Provider.of<MortgageProvider>(context);
+    final summary = mortgageProvider.summary;
+
+    if (summary == null) {
+      return const Center(
+          child: Text("No hay datos disponibles",
+              style: TextStyle(color: Colors.white)));
+    }
+
+    return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          const SizedBox(height: 32),
+          const Text(
             "Tu cuota mensual es",
             style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+                fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
           ),
+          const SizedBox(height: 8),
           Text(
-            calculeLogic.strCuota,
+            mortgageProvider.formatCurrency(summary.monthlyPayment),
             style: TextStyle(
               color: kPrimaryColor,
               fontSize: 48,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          Text(
-            "financiado en ${calculeLogic.periodo} años",
-            style: TextStyle(
-              fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 62),
-          Container(
+          const SizedBox(height: 8),
+          Text(
+            "financiado en ${mortgageProvider.loanPeriodYears.toInt()} años",
+            style: const TextStyle(fontSize: 16, color: Colors.white70),
+          ),
+          const SizedBox(height: 48),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                DetalleCuota(
+                MortgageDetailItem(
                   texto: "Interés total:",
-                  valor: calculeLogic.strInteresTotal,
+                  valor: mortgageProvider.formatCurrency(summary.totalInterest),
                 ),
-                DetalleCuota(
+                MortgageDetailItem(
                   texto: "Pago total vivienda:",
-                  valor: calculeLogic.strPagoTotal,
+                  valor: mortgageProvider.formatCurrency(summary.totalPayment),
                 ),
-                DetalleCuota(
+                MortgageDetailItem(
                   texto: "Valor vivienda:",
-                  valor: calculeLogic.strValorVivienda,
+                  valor: mortgageProvider
+                      .formatCurrency(mortgageProvider.homeValue),
                 ),
-                DetalleCuota(
+                MortgageDetailItem(
                   texto: "Cuota inicial:",
-                  valor: calculeLogic.strInicial,
+                  valor: mortgageProvider
+                      .formatCurrency(mortgageProvider.downPayment),
                 ),
-                DetalleCuota(
+                MortgageDetailItem(
                   texto: "Valor préstamo:",
-                  valor: calculeLogic.strValorPrestamo,
+                  valor: mortgageProvider.formatCurrency(summary.loanAmount),
                 ),
-                DetalleCuota(
+                MortgageDetailItem(
                   texto: "Tasa interés:",
-                  valor: "${calculeLogic.interes}%",
+                  valor: "${mortgageProvider.interestRate}%",
                 ),
               ],
             ),
-          )
+          ),
+          const SizedBox(height: 32),
         ],
       ),
     );

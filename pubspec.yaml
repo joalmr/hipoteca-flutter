@@ -1,7 +1,7 @@
 name: hipoteca
 description: A new Flutter project.
 publish_to: "none"
-version: 0.2.0+2
+version: 0.3.3+6
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -15,8 +15,9 @@ dependencies:
   fl_chart: ^0.63.0
   # flutter_dotenv: ^5.1.0
   google_fonts: ^5.0.0
-  google_mobile_ads: ^5.3.1
+  # google_mobile_ads: ^5.3.1
   intl: ^0.18.1
+  provider: ^6.1.2
 
 dependency_overrides:
   win32: ^5.5.3
@@ -29,7 +30,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.14.1
-  # flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.0
 
 flutter_launcher_icons:
   android: "launcher_icon"
