@@ -29,7 +29,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "com.joalmr.hipoteca"
+    namespace "com.aedev.hipoteca"
     compileSdk 36
     ndkVersion "27.0.12077973"
 
@@ -47,7 +47,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.joalmr.hipoteca"
+        applicationId "com.aedev.hipoteca"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion 36
         versionCode flutterVersionCode.toInteger()
